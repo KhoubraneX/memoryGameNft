@@ -139,7 +139,7 @@ function eventClickFlip(nfts , levelGame){
     // Filter work for each level
     switch (levelGame.value) {
         case "easy":
-            s = 500
+            s = 50
             break;
         case "medium":
             s = 40
@@ -286,12 +286,11 @@ function flipAnim(element , type = "show") {
     }
 }
 
-// let message = document.querySelector(".message")
-// window.addEventListener("keydown" , function(e){
-//     if (e.key == "F12"){
-//         e.preventDefault()
-//     }
-// })
-// window.addEventListener("contextmenu" , function(e){
-//     e.preventDefault()
-// })
+window.addEventListener("keydown" , function(e){
+     if (e.key == "F12"){
+         e.preventDefault()
+     }
+})
+window.addEventListener("contextmenu" , function(e){
+     e.preventDefault()
+})
