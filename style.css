@@ -6,53 +6,46 @@
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     font-size: 16px;
+    font-family: 'ZCOOL KuaiLe', cursive;
 }
 :root {
     --width-primary: 150px;
 }
 body {
+    height: 100vh;
     background-color: #161614;
+    cursor: url(Img/icons8-hand-cursor-32.png) , auto;
     background: url(Img/back.png) no-repeat;
     background-size: cover;
-    height: 100vh;
-    cursor: url(Img/icons8-hand-cursor-32.png) , auto;
 }
 .nav {
     display: flex;
     justify-content: space-between;
-    max-width: 720px;
+    max-width: calc(720px - 15px * 2);
     width: 100%;
-    padding: 15px;
+    padding: 0 15px;
     transition: 0.5s;
+    margin-top: 50px;
+    border: 3px solid #ffffff73;
+    box-shadow: inset 0px 0px 20px 0px black;
+    border-radius: 5px;
 }
 .nav div {
     display: flex;
     align-items: center;
     padding: 10px 0;
 }
-.nav p {
+.nav span {
+    color: #8f8f8f;
+    margin-left: 5px;
+}
+.nav *{
     color: white;
-    font-size: 30px;
-    font-family: 'ZCOOL KuaiLe', cursive;
+    font-size: 25px;
 }
 .nav img {
-    height: 60px;
+    height: 40px;
     margin-right: 20px;
-}
-.message {
-    display: none;
-    z-index: 20;
-    position: fixed;
-    bottom: 50px;
-    right: 50px;
-    text-transform: capitalize;
-    background: black;
-    padding: 10px 30px;
-    border-radius: 5px;
-}
-.message p {
-    color: white;
-    font-size: 18px;
 }
 .level-opt {
     text-align: center;
@@ -75,11 +68,12 @@ body {
 }
 .Game-start {
     display: flex;
+    height: 100vh;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 100%;
     transition: 0.5s;
+    position: relative;
 }
 .nft-gif {
     max-height: 300px;
@@ -123,7 +117,7 @@ body {
     }
 }
 .Game-c {
-    height: 100%;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -273,6 +267,9 @@ body {
 /* media query */
 
 @media (max-width: 768px) {
+    body {
+        background-size: auto;
+    }
     .crad-grid {
         grid-template-columns: repeat(3 , minmax(var(--width-primary) , 1fr) );
     }
@@ -286,12 +283,12 @@ body {
         height: 400px;
     }
     .nav {
-        max-width: 390px;
+        max-width: calc(390px - 15px * 2);
     }
     .nav img {
         height: 40px;
     }
-    .nav p {
+    .nav *{
         font-size: 20px;
     }
 }

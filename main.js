@@ -50,16 +50,13 @@ if (counter == 8) {
 
 // start game
 function creatGame(levelGame){
-    document.body.innerHTML += `<div class="message">
-        <p>you can't see anything</p>
-    </div>`
     let div = document.createElement("div")
     div.className = "container Game-c"
     div.innerHTML += `
     <div class="nav">
                 <div class="time">
                     <img src="./icon/icons8-timer-100.png"/>
-                    <p>-</p>
+                    <p>-</p><span>s</span>
                 </div>       
                 <div class="try">
                     <img src="./icon/icons8-restart-100.png"/>
@@ -100,6 +97,21 @@ function gameStrat(levelGame){
     nfts.forEach((e)=>{
         flipAnim(e)
     })
+
+    // time fillter with level game
+    let timeShow = 3000
+    switch (levelGame.value) {
+        case "hard":
+            timeShow = 3800
+            break;
+        case "don't try":
+            timeShow = 5000
+            break;
+        default:
+            timeShow = 3000
+            break;
+    }
+    //
     setTimeout(()=>{
         nfts.forEach((e)=>{
             flipAnim(e , "hide")
@@ -107,7 +119,7 @@ function gameStrat(levelGame){
         setTimeout(()=>{
             eventClickFlip(nfts , levelGame)
         },1000)
-    },2000)
+    },timeShow)
 }
 
 function eventClickFlip(nfts , levelGame){
@@ -119,22 +131,23 @@ function eventClickFlip(nfts , levelGame){
     //
 
     let trySec = document.querySelector(".try p")
-    let tryCounter = 8
-
+    
     //
+    let tryCounter = 20
     let timerSec = document.querySelector(".time p")
     let s = null
+    // Filter work for each level
     switch (levelGame.value) {
         case "easy":
-            s = 55
+            s = 500
             break;
         case "medium":
             s = 40
-            tryCounter = 20
+            tryCounter = 16
             break;
         case "hard":
-            s = 30
-            tryCounter = 16
+            s = 25
+            tryCounter = 8
             break;
         case "don't try":
             s = "-"
@@ -273,12 +286,12 @@ function flipAnim(element , type = "show") {
     }
 }
 
-let message = document.querySelector(".message")
-window.addEventListener("keydown" , function(e){
-    if (e.key == "F12"){
-        e.preventDefault()
-    }
-})
-window.addEventListener("contextmenu" , function(e){
-    e.preventDefault()
-})
+// let message = document.querySelector(".message")
+// window.addEventListener("keydown" , function(e){
+//     if (e.key == "F12"){
+//         e.preventDefault()
+//     }
+// })
+// window.addEventListener("contextmenu" , function(e){
+//     e.preventDefault()
+// })
