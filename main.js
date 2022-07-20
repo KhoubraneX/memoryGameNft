@@ -1,36 +1,31 @@
-// preloder
-// window.addEventListener("load",()=>{
-//     console.log("yes");
-// })
-
 // landing game
 let btnS = document.querySelector(".btn-s");
 let containerS = document.querySelector(".Game-start")
-btnS.addEventListener("click" , function(e) {
+btnS.addEventListener("click", function (e) {
     let x = e.clientX - e.target.offsetLeft;
     let y = e.clientY - e.target.offsetTop;
     let ripples = document.createElement("span");
     ripples.className = "span-effect";
-    ripples.style.left = x + "px" ;
+    ripples.style.left = x + "px";
     ripples.style.top = y + "px";
     this.appendChild(ripples)
     setTimeout(() => {
         ripples.remove()
-    },1000)
+    }, 1000)
 })
 
 // fix multiple clicks
 let clickStart = false
-btnS.addEventListener("click" , function(e){
+btnS.addEventListener("click", function (e) {
     let levelGame = document.querySelector(".level-opt")
-    if (clickStart == false){
-        setTimeout(()=>{
+    if (clickStart == false) {
+        setTimeout(() => {
             containerS.classList.add("left")
-        },500)
-        setTimeout(()=>{
+        }, 500)
+        setTimeout(() => {
             containerS.remove()
             creatGame(levelGame)
-        },1000)
+        }, 1000)
         clickStart = true
     }
 })
@@ -40,16 +35,16 @@ btnS.addEventListener("click" , function(e){
 let divNfts = []
 let counter = 0
 for (let i = 1; i <= 16; i++) {
-counter++
-let div = `<div class="nft-i" data-postion="p-${i}"><img data-fillter="n-${counter}" src="Img/${counter}.png" alt=""></div>`
-divNfts.push(div)
-if (counter == 8) {
-    counter = 0
+    counter++
+    let div = `<div class="nft-i" data-postion="p-${i}"><img data-fillter="n-${counter}" src="Img/${counter}.png" alt=""></div>`
+    divNfts.push(div)
+    if (counter == 8) {
+        counter = 0
     }
 }
 
 // start game
-function creatGame(levelGame){
+function creatGame(levelGame) {
     let div = document.createElement("div")
     div.className = "container Game-c"
     div.innerHTML += `
@@ -73,10 +68,10 @@ function creatGame(levelGame){
 
     // generate random nfts form generate list
     let lengthNfts = divNfts.length
-    for (let i = 0; i < lengthNfts ; i++) {
-    let mt = Math.trunc(Math.random() * divNfts.length - 1)
-    div2.innerHTML += divNfts[mt]
-    divNfts.splice(divNfts.indexOf(divNfts[mt]),1)
+    for (let i = 0; i < lengthNfts; i++) {
+        let mt = Math.trunc(Math.random() * divNfts.length - 1)
+        div2.innerHTML += divNfts[mt]
+        divNfts.splice(divNfts.indexOf(divNfts[mt]), 1)
     }
 
     div.innerHTML += `<div class="win-section">
@@ -91,10 +86,10 @@ function creatGame(levelGame){
     gameStrat(levelGame)
 }
 
-function gameStrat(levelGame){
+function gameStrat(levelGame) {
     let nfts = document.querySelectorAll(".nft-i")
     // show all nfts
-    nfts.forEach((e)=>{
+    nfts.forEach((e) => {
         flipAnim(e)
     })
 
@@ -112,17 +107,17 @@ function gameStrat(levelGame){
             break;
     }
     //
-    setTimeout(()=>{
-        nfts.forEach((e)=>{
-            flipAnim(e , "hide")
+    setTimeout(() => {
+        nfts.forEach((e) => {
+            flipAnim(e, "hide")
         })
-        setTimeout(()=>{
-            eventClickFlip(nfts , levelGame)
-        },1000)
-    },timeShow)
+        setTimeout(() => {
+            eventClickFlip(nfts, levelGame)
+        }, 1000)
+    }, timeShow)
 }
 
-function eventClickFlip(nfts , levelGame){
+function eventClickFlip(nfts, levelGame) {
     let counterWin = 0
     let counterClick = 0
     let nftOne = null
@@ -131,7 +126,7 @@ function eventClickFlip(nfts , levelGame){
     //
 
     let trySec = document.querySelector(".try p")
-    
+
     //
     let tryCounter = 20
     let timerSec = document.querySelector(".time p")
@@ -159,58 +154,58 @@ function eventClickFlip(nfts , levelGame){
     }
     trySec.innerHTML = tryCounter
     timerSec.innerHTML = s
-    let time = setInterval(()=>{
-    if (typeof(s) == "number"){
-        if (timerSec.innerHTML != 0){
-            timerSec.innerHTML = --s
-        }else {
-            clearInterval(time)
-            failedAnim()
+    let time = setInterval(() => {
+        if (typeof (s) == "number") {
+            if (timerSec.innerHTML != 0) {
+                timerSec.innerHTML = --s
+            } else {
+                clearInterval(time)
+                failedAnim()
+            }
         }
-    }
-    },1000)
+    }, 1000)
     //
 
-    nfts.forEach((e)=>{
-        e.addEventListener("click" , function(){
+    nfts.forEach((e) => {
+        e.addEventListener("click", function () {
             //
-            if (counterClick < 2 && nftPostion.includes(this.dataset.postion) == false){
+            if (counterClick < 2 && nftPostion.includes(this.dataset.postion) == false) {
                 flipAnim(this)
-                if (counterClick < 1){
+                if (counterClick < 1) {
                     nftOne = this
                 }
                 counterClick++
 
-                if (counterClick == 2 && nftOne.dataset.postion != this.dataset.postion && nftPostion.includes(nftOne.dataset.postion) == false &&  nftPostion.includes(this.dataset.postion) == false) {
-                    if(nftOne.firstElementChild.dataset.fillter != this.firstElementChild.dataset.fillter){
-                        setTimeout(()=>{
-                            flipAnim(nftOne , "hide")
-                            flipAnim(this , "hide")
-                            if (trySec.innerHTML > 1){
+                if (counterClick == 2 && nftOne.dataset.postion != this.dataset.postion && nftPostion.includes(nftOne.dataset.postion) == false && nftPostion.includes(this.dataset.postion) == false) {
+                    if (nftOne.firstElementChild.dataset.fillter != this.firstElementChild.dataset.fillter) {
+                        setTimeout(() => {
+                            flipAnim(nftOne, "hide")
+                            flipAnim(this, "hide")
+                            if (trySec.innerHTML > 1) {
                                 trySec.innerHTML = --tryCounter
-                            }else{
+                            } else {
                                 failedAnim()
                             }
                             counterClick = 0
-                        },800)
-                    }else {
+                        }, 800)
+                    } else {
                         // storage nftPostion to don't click again
                         nftPostion.push(nftOne.dataset.postion)
                         nftPostion.push(this.dataset.postion)
 
                         counterWin++
-                        if (counterWin == 8){
+                        if (counterWin == 8) {
                             clearInterval(time)
                             winAnim()
                         }
-                        setTimeout(()=>{
+                        setTimeout(() => {
                             counterClick = 0
-                        },800)
+                        }, 800)
                         //
-                        
+
                         //
                     }
-                }else {
+                } else {
                     counterClick = 1
                     nftOne = this
                 }
@@ -228,18 +223,18 @@ function winAnim() {
     let cradGrid = document.querySelector(".crad-grid")
     let winMon = document.querySelector(".monkey-liser")
     let nav = document.querySelector(".nav")
-    nav.setAttribute("style","opacity: 0;")
+    nav.setAttribute("style", "opacity: 0;")
     winSec.classList.add("win-rotate")
-    setTimeout(()=>{
+    setTimeout(() => {
         winMon.classList.add("win-top")
         cradGrid.classList.add("win-scale")
         nfts.forEach((e) => {
-            return e.setAttribute("style","filter: blur(3px);")
+            return e.setAttribute("style", "filter: blur(3px);")
         })
-        setTimeout(()=>{
+        setTimeout(() => {
             succ.classList.add("win-opa")
-        },500)
-    },2000)
+        }, 500)
+    }, 2000)
 }
 
 // failde
@@ -250,47 +245,38 @@ function failedAnim() {
     let cradGrid = document.querySelector(".crad-grid")
     let winMon = document.querySelector(".monkey-liser")
     let nav = document.querySelector(".nav")
-    nav.setAttribute("style","opacity: 0;")
+    nav.setAttribute("style", "opacity: 0;")
     succ.firstElementChild.innerHTML = "failed!"
     succ.firstElementChild.style.color = "red"
-    cradGrid.setAttribute("style","z-index: -1;")
+    cradGrid.setAttribute("style", "z-index: -1;")
     winMon.firstElementChild.src = "Img/f.png"
-    setTimeout(()=>{
+    setTimeout(() => {
         winMon.classList.add("win-top")
         cradGrid.classList.add("win-scale")
         nfts.forEach((e) => {
-            return e.setAttribute("style","filter: blur(3px);")
+            return e.setAttribute("style", "filter: blur(3px);")
         })
-        setTimeout(()=>{
+        setTimeout(() => {
             succ.classList.add("win-opa")
-        },500)
-    },800)
+        }, 500)
+    }, 800)
 }
 
 // flip anmation
 
-function flipAnim(element , type = "show") {
-    if (type == "show"){
+function flipAnim(element, type = "show") {
+    if (type == "show") {
         element.classList.remove("Nclicked")
         element.classList.add("clicked")
-        setTimeout(()=>{
+        setTimeout(() => {
             element.firstElementChild.style.display = "block"
-        },300)
+        }, 300)
     }
     if (type == "hide") {
         element.classList.remove("clicked")
         element.classList.add("Nclicked")
-        setTimeout(()=>{
+        setTimeout(() => {
             element.firstElementChild.style.display = "none"
-        },300)
+        }, 300)
     }
 }
-
-window.addEventListener("keydown" , function(e){
-     if (e.key == "F12"){
-         e.preventDefault()
-     }
-})
-window.addEventListener("contextmenu" , function(e){
-     e.preventDefault()
-})
