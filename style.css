@@ -190,6 +190,26 @@ body {
     }
 }
 
+@-webkit-keyframes clickAnim {
+    0% {
+        transform: rotate3d(0, 0, 0, 0deg);
+    }
+
+    100% {
+        transform: rotate3d(1, 3, 1, 360deg);
+    }
+}
+
+@-webkit-keyframes NclickAnim {
+    0% {
+        transform: rotate3d(1, 3, 1, 360deg);
+    }
+
+    100% {
+        transform: rotate3d(0, 0, 0, 0deg);
+    }
+}
+
 .win-section {
     position: fixed;
     bottom: -100px;
