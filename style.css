@@ -11,7 +11,7 @@
 }
 
 :root {
-    --width-primary: 150px;
+    --width-primary: 110px;
 }
 
 body {
@@ -25,7 +25,7 @@ body {
 .nav {
     display: flex;
     justify-content: space-between;
-    max-width: calc(720px - 15px * 2);
+    max-width: calc(560px - 15px * 2);
     width: 100%;
     padding: 0 15px;
     transition: 0.5s;
@@ -342,7 +342,7 @@ body {
     }
 
     :root {
-        --width-primary: 100px;
+        --width-primary: 78px;
     }
 
     .succ h1 {
@@ -355,7 +355,7 @@ body {
     }
 
     .nav {
-        max-width: calc(390px - 15px * 2);
+        max-width: calc(323px - 15px * 2);
         margin-top: 20px;
     }
 
@@ -373,5 +373,6 @@ body {
 
     .Game-c {
         height: initial;
+        flex-direction: column-reverse;
     }
 }
